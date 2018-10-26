@@ -7,8 +7,8 @@ suite('ITPHelper', () => {
     contentContainer = document.createElement('div');
     button = document.createElement('button');
 
-    contentContainer.setAttribute('id', 'Content');
-    button.setAttribute('id', 'Action');
+    contentContainer.setAttribute('id', 'TopLevelInteractionContent');
+    button.setAttribute('id', 'TopLevelInteractionButton');
     button.setAttribute('type', 'button');
 
     contentContainer.appendChild(button);
@@ -96,28 +96,26 @@ suite('ITPHelper', () => {
   });
 
   suite('setUpContent', () => {
-    test('adds an event listener to the expected button that calls redirect on click', () => {
+    test('adds an event listener to the #TopLevelInteractionButton node that calls redirect on click', () => {
       const helper = new ITPHelper({
-        content: '#Content',
-        action: '#Action',
+        redirectUrl: 'https://test',
       });
 
       helper.setUpContent();
 
-      button = document.querySelector('#Action');
+      button = document.querySelector('#TopLevelInteractionButton');
       button.click();
 
       sinon.assert.called(redirectStub);
     });
 
-    test('sets display property of the expected node to "block"', () => {
+    test('sets display property of the #TopLevelInteractionContent node to "block"', () => {
       const helper = new ITPHelper({
-        content: '#Content',
-        action: '#Action',
+        redirectUrl: 'https://test',
       });
 
       helper.setUpContent();
-      contentContainer = document.querySelector('#Content');
+      contentContainer = document.querySelector('#TopLevelInteractionContent');
       sinon.assert.match(contentContainer.style.display, 'block');
     });
   });

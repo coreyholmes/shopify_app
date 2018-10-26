@@ -1,7 +1,7 @@
-function ITPHelper(selectors) {
-  this.itpContent = document.querySelector(selectors.content);
-  this.itpAction = document.querySelector(selectors.action);
-  this.redirectUrl = selectors.redirectUrl;
+function ITPHelper(opts) {
+  this.itpContent = document.querySelector('#TopLevelInteractionContent');
+  this.itpAction = document.querySelector('#TopLevelInteractionButton');
+  this.redirectUrl = opts.redirectUrl;
 }
 
 ITPHelper.prototype.redirect = function() {
