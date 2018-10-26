@@ -30,3 +30,15 @@ ITPHelper.prototype.setUpContent = function(onClick) {
   this.itpContent.style.display = 'block';
   this.itpAction.addEventListener('click', this.redirect.bind(this));
 }
+
+ITPHelper.prototype.execute = function() {
+  if (!this.itpContent) {
+    return;
+  }
+
+  if (this.userAgentIsAffected()) {
+    this.setUpContent();
+  } else {
+    this.redirect();
+  }
+}
