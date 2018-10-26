@@ -1,7 +1,7 @@
 suite('ITPHelper', () => {
+  const ITPHelperSandbox = sinon.createSandbox();
   let contentContainer;
   let button;
-  let redirectStub;
 
   setup(() => {
     contentContainer = document.createElement('div');
@@ -13,12 +13,12 @@ suite('ITPHelper', () => {
 
     contentContainer.appendChild(button);
     document.body.appendChild(contentContainer);
-    redirectStub = sinon.stub(ITPHelper.prototype, 'redirect');
+    ITPHelperSandbox.stub(ITPHelper.prototype, 'redirect');
   });
 
   teardown(() => {
     document.body.removeChild(contentContainer);
-    redirectStub.restore();
+    ITPHelperSandbox.restore();
   });
 
   suite('userAgentIsAffected', () => {
@@ -38,7 +38,7 @@ suite('ITPHelper', () => {
       sinon.assert.match(ITPHelper.prototype.userAgentIsAffected(), false);
     });
 
-    test('returns false if document.storageAccess is undefined', () => {
+    test('returns false if document.hasStorageAccess is undefined', () => {
       navigator.__defineGetter__('userAgent', function(){
         return '';
       });
@@ -48,12 +48,14 @@ suite('ITPHelper', () => {
       sinon.assert.match(ITPHelper.prototype.userAgentIsAffected(), false);
     });
 
-    test('returns true if document.storageAccess is defined', () => {
+    test('returns true if document.hasStorageAccess is defined', () => {
       navigator.__defineGetter__('userAgent', function(){
         return '';
       });
 
-      document.hasStorageAccess = sinon.stub();
+      document.hasStorageAccess = function() {
+        return true;
+      }
 
       sinon.assert.match(ITPHelper.prototype.userAgentIsAffected(), true);
     });
@@ -106,7 +108,7 @@ suite('ITPHelper', () => {
       button = document.querySelector('#TopLevelInteractionButton');
       button.click();
 
-      sinon.assert.called(redirectStub);
+      sinon.assert.called(ITPHelper.prototype.redirect);
     });
 
     test('sets display property of the #TopLevelInteractionContent node to "block"', () => {
