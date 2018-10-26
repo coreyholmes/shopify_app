@@ -1,12 +1,12 @@
 var ACCESS_GRANTED_STATUS = 'access granted';
 var ACCESS_DENIED_STATUS = 'access denied';
 
-function StorageAccessHelper(redirectInfo) {
-  this.redirectInfo = redirectInfo;
+function StorageAccessHelper(redirectData) {
+  this.redirectData = redirectData;
 }
 
 StorageAccessHelper.prototype.setNormalizedLink = function(storageAccessStatus) {
-  return storageAccessStatus === ACCESS_GRANTED_STATUS ? this.redirectInfo.hasStorageAccessUrl : this.redirectInfo.doesNotHaveStorageAccessUrl;
+  return storageAccessStatus === ACCESS_GRANTED_STATUS ? this.redirectData.hasStorageAccessUrl : this.redirectData.doesNotHaveStorageAccessUrl;
 }
 
 StorageAccessHelper.prototype.redirectToAppTLD = function(storageAccessStatus) {
@@ -20,15 +20,15 @@ StorageAccessHelper.prototype.redirectToAppTLD = function(storageAccessStatus) {
       location: normalizedLink.href,
     }
   });
-  window.parent.postMessage(data, this.redirectInfo.myshopifyUrl);
+  window.parent.postMessage(data, this.redirectData.myshopifyUrl);
 }
 
 StorageAccessHelper.prototype.redirectToAppsIndex = function() {
-  window.parent.location.href = this.redirectInfo.myshopifyUrl + '/admin/apps';
+  window.parent.location.href = this.redirectData.myshopifyUrl + '/admin/apps';
 }
 
 StorageAccessHelper.prototype.redirectToAppHome = function() {
-  window.location.href = this.redirectInfo.appHomeUrl;
+  window.location.href = this.redirectData.appHomeUrl;
 }
 
 StorageAccessHelper.prototype.grantedStorageAccess = function() {
@@ -110,5 +110,3 @@ StorageAccessHelper.prototype.setUpCookiePartitioning = function() {
   var button = document.querySelector('#AcceptCookies');
   button.addEventListener('click', this.setCookieAndRedirect.bind(this));
 }
-
-

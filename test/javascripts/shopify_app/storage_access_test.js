@@ -1,6 +1,6 @@
 suite('StorageAccessHelper', () => { 
   let storageAccessHelper;
-  const redirectInfoStub = {
+  const redirectDataStub = {
     hasStorageAccessUrl: 'https://hasStorageAccess.com',
     doesNotHaveStorageAccessUrl: 'https://doesNotHaveStorageAccess.com',
     myShopifyUrl: 'https://shop1.myshopify.io',
@@ -23,7 +23,7 @@ suite('StorageAccessHelper', () => {
 
     contentContainer.appendChild(button);
     document.body.appendChild(contentContainer);
-    storageAccessHelper = new StorageAccessHelper(redirectInfoStub);
+    storageAccessHelper = new StorageAccessHelper(redirectDataStub);
     redirectStub = sinon.stub(ITPHelper.prototype, 'redirect');
   });
 
@@ -232,14 +232,14 @@ suite('StorageAccessHelper', () => {
   });
 
   suite('setNormalizedLink', () => {
-    test('returns redirectInfo.hasStorageAccessUrl if storage access is granted', () => {
+    test('returns redirectData.hasStorageAccessUrl if storage access is granted', () => {
       const link = storageAccessHelper.setNormalizedLink('access granted');
-      sinon.assert.match(link, redirectInfoStub.hasStorageAccessUrl);
+      sinon.assert.match(link, redirectDataStub.hasStorageAccessUrl);
     });
 
-    test('returns redirectInfo.doesNotHaveStorageAccessUrl if storage access is denied', () => {
+    test('returns redirectData.doesNotHaveStorageAccessUrl if storage access is denied', () => {
       const link = storageAccessHelper.setNormalizedLink('access denied');
-      sinon.assert.match(link, redirectInfoStub.doesNotHaveStorageAccessUrl);
+      sinon.assert.match(link, redirectDataStub.doesNotHaveStorageAccessUrl);
     });
   });
 
