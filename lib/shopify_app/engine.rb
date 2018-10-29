@@ -6,7 +6,7 @@ module ShopifyApp
     initializer "shopify_app.assets.precompile" do |app|
       app.config.assets.precompile += %w[
         shopify_app/redirect.js
-        shopify_app/itp_polyfill.js
+        shopify_app/itp_helper.js
         shopify_app/partition_cookies.js
         shopify_app/storage_access.js
         shopify_app/storage_access_redirect.js
