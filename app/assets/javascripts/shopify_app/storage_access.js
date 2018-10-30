@@ -1,6 +1,6 @@
 (function() {
-  var ACCESS_GRANTED_STATUS = 'access granted';
-  var ACCESS_DENIED_STATUS = 'access denied';
+  var ACCESS_GRANTED_STATUS = 'storage_access_granted';
+  var ACCESS_DENIED_STATUS = 'storage_access_denied';
 
   function StorageAccessHelper(redirectData) {
     this.redirectData = redirectData;
@@ -33,7 +33,7 @@
   }
 
   StorageAccessHelper.prototype.grantedStorageAccess = function() {
-    sessionStorage.setItem('shopify.granted_storage_access', 'true');
+    sessionStorage.setItem('shopify.granted_storage_access', true);
     document.cookie = 'shopify.granted_storage_access=true';
     this.redirectToAppHome();
   }
@@ -43,8 +43,8 @@
   }
 
   StorageAccessHelper.prototype.setupRequestStorageAccess = function() {
-    const requestContent = document.querySelector('#RequestStorageAccess');
-    const requestButton = document.querySelector('#TriggerAllowCookiesPrompt');
+    var requestContent = document.getElementById('RequestStorageAccess');
+    var requestButton = document.getElementById('TriggerAllowCookiesPrompt');
 
     requestButton.addEventListener('click', this.handleRequestStorageAccess.bind(this));
     requestContent.style.display = 'block';
@@ -105,10 +105,10 @@
   }
 
   StorageAccessHelper.prototype.setUpCookiePartitioning = function() {
-    var itpContent = document.querySelector('#CookiePartitionPrompt');
+    var itpContent = document.getElementById('CookiePartitionPrompt');
     itpContent.style.display = 'block';
 
-    var button = document.querySelector('#AcceptCookies');
+    var button = document.getElementById('AcceptCookies');
     button.addEventListener('click', this.setCookieAndRedirect.bind(this));
   }
 

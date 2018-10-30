@@ -175,7 +175,7 @@ suite('StorageAccessHelper', () => {
       });
     });
 
-    test('calls redirectToAppsIndex with "access denied" instead of calling redirectToAppHome when document.requestStorageAccess fails', () => {
+    test('calls redirectToAppsIndex with "storage_access_denied" instead of calling redirectToAppHome when document.requestStorageAccess fails', () => {
       document.requestStorageAccess = () => {
         return new Promise((resolve, reject) => {
           reject();
@@ -187,7 +187,7 @@ suite('StorageAccessHelper', () => {
 
       storageAccessHelper.handleRequestStorageAccess().then(() => {
         sinon.assert.notCalled(storageAccessHelper.redirectToAppHome);
-        sinon.assert.calledWith(storageAccessHelper.redirectToAppsIndex, 'access denied');
+        sinon.assert.calledWith(storageAccessHelper.redirectToAppsIndex, 'storage_access_denied');
       });
     });
   });
@@ -201,12 +201,12 @@ suite('StorageAccessHelper', () => {
 
   suite('setNormalizedLink', () => {
     test('returns redirectData.hasStorageAccessUrl if storage access is granted', () => {
-      const link = storageAccessHelper.setNormalizedLink('access granted');
+      const link = storageAccessHelper.setNormalizedLink('storage_access_granted');
       sinon.assert.match(link, redirectDataStub.hasStorageAccessUrl);
     });
 
     test('returns redirectData.doesNotHaveStorageAccessUrl if storage access is denied', () => {
-      const link = storageAccessHelper.setNormalizedLink('access denied');
+      const link = storageAccessHelper.setNormalizedLink('storage_access_denied');
       sinon.assert.match(link, redirectDataStub.doesNotHaveStorageAccessUrl);
     });
   });

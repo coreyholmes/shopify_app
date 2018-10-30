@@ -1,12 +1,12 @@
 (function() {
   function ITPHelper(opts) {
-    this.itpContent = document.querySelector('#TopLevelInteractionContent');
-    this.itpAction = document.querySelector('#TopLevelInteractionButton');
+    this.itpContent = document.getElementById('TopLevelInteractionContent');
+    this.itpAction = document.getElementById('TopLevelInteractionButton');
     this.redirectUrl = opts.redirectUrl;
   }
   
   ITPHelper.prototype.redirect = function() {
-    sessionStorage.setItem('shopify.top_level_interaction', 'true');
+    sessionStorage.setItem('shopify.top_level_interaction', true);
     window.location.href = this.redirectUrl;
   }
   
