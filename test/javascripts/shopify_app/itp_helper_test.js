@@ -22,22 +22,6 @@ suite('ITPHelper', () => {
   });
 
   suite('userAgentIsAffected', () => {
-    test('returns false the user agent is Shopify POS', () => {
-      navigator.__defineGetter__('userAgent', function(){
-        return 'com.jadedpixel.pos';
-      });
-
-      sinon.assert.match(ITPHelper.prototype.userAgentIsAffected(), false);
-    });
-
-    test('returns false if the user agent is the Shopify mobile app', () => {
-      navigator.__defineGetter__('userAgent', function(){
-        return 'Shopify Mobile/iOS';
-      });
-
-      sinon.assert.match(ITPHelper.prototype.userAgentIsAffected(), false);
-    });
-
     test('returns false if document.hasStorageAccess is undefined', () => {
       navigator.__defineGetter__('userAgent', function(){
         return '';

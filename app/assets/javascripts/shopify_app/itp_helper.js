@@ -11,14 +11,6 @@
   }
   
   ITPHelper.prototype.userAgentIsAffected = function() {
-    if (navigator.userAgent.indexOf('com.jadedpixel.pos') !== -1) {
-      return false;
-    }
-  
-    if (navigator.userAgent.indexOf('Shopify Mobile/iOS') !== -1) {
-      return false;
-    }
-  
     return Boolean(document.hasStorageAccess);
   }
   
