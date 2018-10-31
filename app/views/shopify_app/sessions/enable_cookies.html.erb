@@ -329,9 +329,7 @@
     window.shopOrigin = "https://<%= @shop %>";
   </script>
 
-  <%= javascript_include_tag('shopify_app/itp_helper', crossorigin: 'anonymous', integrity: true) %>
-  <%= javascript_include_tag('shopify_app/storage_access', crossorigin: 'anonymous', integrity: true) %>
-  <%= javascript_include_tag('shopify_app/partition_cookies', crossorigin: 'anonymous', integrity: true) %>
+  <%= javascript_include_tag('shopify_app/enable_cookies', crossorigin: 'anonymous', integrity: true) %>
 </head>
 <body>
   <main id="CookiePartitionPrompt">
