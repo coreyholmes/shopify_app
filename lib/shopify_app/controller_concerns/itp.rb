@@ -22,7 +22,7 @@ module ShopifyApp
 
     def user_agent_is_mobile
       mobile_regex = %r{Shopify Mobile/iOS}
-      return request.user_agent.match(mobile_regex)
+      request.user_agent.match(mobile_regex)
     end
 
     def user_agent_is_pos
