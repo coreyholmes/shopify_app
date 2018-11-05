@@ -14,5 +14,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       end
 
       strategy.options[:client_options][:site] = shop
+      strategy.options[:client_options][:old_client_secret] = ENV['SHOPIFY_OLD_CLIENT_SECRET']
     }
 end
