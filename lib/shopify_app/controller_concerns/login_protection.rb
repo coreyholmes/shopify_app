@@ -1,3 +1,5 @@
+require 'browser_sniffer'
+
 module ShopifyApp
   module LoginProtection
     extend ActiveSupport::Concern
