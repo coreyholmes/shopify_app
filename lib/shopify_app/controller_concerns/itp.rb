@@ -23,23 +23,23 @@ module ShopifyApp
     def user_agent_is_mobile
       user_agent = BrowserSniffer.new(request.user_agent).browser_info
 
-      user_agent[:name] === 'Shopify Mobile'
+      user_agent[:name].match(/Shopify\sMobile/)
     end
 
     def user_agent_is_pos
       user_agent = BrowserSniffer.new(request.user_agent).browser_info
 
-      user_agent[:name] === 'Shopify POS'
+      user_agent[:name].match(/Shopify\sPOS/)
     end
 
     def user_agent_can_partition_cookies
       user_agent = BrowserSniffer.new(request.user_agent).browser_info
-      
-      is_safari = user_agent[:name] === 'Safari'
-      
+
+      is_safari = user_agent[:name].match(/Safari/)
+
       return false unless is_safari
 
-      user_agent[:version] === "12.0"
+      user_agent[:version].match(/12.0/)
     end
   end
 end
